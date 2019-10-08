@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!{% endblock %}
+
+{% block body %}
+
+<div class="text-center">
+    <h1>Genres</h1>
+    {% for unGenre in lesGenres %}
+        <a href="{{ path('infoGenre', {'id': unGenre.id}) }}" > {{ unGenre.libelle }} </a>
+    {% endfor %}
+</div>
+
+{% endblock %}

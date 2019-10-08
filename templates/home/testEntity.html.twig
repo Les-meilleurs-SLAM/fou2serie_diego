@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!{% endblock %}
+
+{% block body %}
+
+<div class="text-center">
+    <h1>Series</h1>
+    <p>{{laSerie.id}}</p>
+    <p>{{laSerie.titre}}</p>
+    <p>{{laSerie.resume}}</p>
+    <p>{{laSerie.duree|date("h:i:s")}}</p>
+    <p>{{laSerie.premiereDiffusion|date("d-M-Y")}}</p>
+    <p>{{laSerie.image}}</p>
+</div>
+
+{% endblock %}

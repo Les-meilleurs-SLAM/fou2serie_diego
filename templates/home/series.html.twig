@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!{% endblock %}
+
+{% block body %}
+
+<div class="text-center">
+    <h1>Series</h1>
+    <div class="row">
+    {% for laSerie in lesSeries %}
+    <div class="sm-4">
+        <div class="card h-100" style="width: 18rem;">
+            <div class="card-top">
+                <a href="{{ path('infoSerie', {'id': laSerie.id}) }}"><img src="{{asset('images/'~ laSerie.image)}}" /></a>
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">{{ laSerie.titre }}</h5>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

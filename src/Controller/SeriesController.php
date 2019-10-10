@@ -7,6 +7,8 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Serie;
 use App\Entity\Genre;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
+use Knp\Component\Pager\PaginatorInterface;
 
 class SeriesController extends AbstractController
 {
@@ -23,10 +25,15 @@ class SeriesController extends AbstractController
     /**
     * @Route("/series", name="series")
     */
-    public function series()
+    public function series(Request $request, PaginatorInterface $paginator)
     {
         $repository = $this->getDoctrine()->getRepository(Serie::class);
         $serie = $repository->findBy([],['titre' => 'ASC']);
+        $serie=$paginator->paginate(
+            $serie,
+            $request->query->getInt('Page',1),
+            2
+        );
         return $this->render('home/series.html.twig', ['lesSeries'=>$serie]);
     }
 

@@ -29,10 +29,10 @@ class SeriesController extends AbstractController
     {
         $repository = $this->getDoctrine()->getRepository(Serie::class);
         $serie = $repository->findBy([],['titre' => 'ASC']);
-        $serie=$paginator->paginate(
-            $serie,
-            $request->query->getInt('Page',1),
-            2
+        $serie = $paginator->paginate(
+            $serie, /* query NOT result */
+            $request->query->getInt('page', 1), /*page number*/
+            1 /*limit per page*/
         );
         return $this->render('home/series.html.twig', ['lesSeries'=>$serie]);
     }

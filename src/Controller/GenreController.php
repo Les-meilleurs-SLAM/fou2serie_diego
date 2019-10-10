@@ -6,6 +6,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Genre;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
+use Knp\Component\Pager\PaginatorInterface;
 
 class GenreController extends AbstractController
 {
@@ -22,11 +24,16 @@ class GenreController extends AbstractController
     /**
     * @Route("/infoGenre/{id}", name="infoGenre")
     */
-    public function infoGenre($id)
+    public function infoGenre($id, Request $request, PaginatorInterface $paginator)
     {
         $repository = $this->getDoctrine()->getRepository(Genre::class);
         $genre = $repository->find($id);
         $lesSeries=$genre->getlesSeries();
+        $lesSeries = $paginator->paginate(
+            $lesSeries, 
+            $request->query->getInt('page', 1), 
+            1 
+        );
         return $this->render('home/series.html.twig', ['lesSeries'=>$lesSeries]);
     }
 

@@ -6,8 +6,12 @@
 
 <div class="text-center">
     <h1>Genres</h1>
+    <br/><br/>
+    <hr/>
     {% for unGenre in lesGenres %}
-        <a href="{{ path('infoGenre', {'id': unGenre.id}) }}" > {{ unGenre.libelle }} </a>
+        <h4><a href="{{ path('infoGenre', {'id': unGenre.id}) }}" > {{ unGenre.libelle }}</a></h4>
+        <br/>
+        <hr/>
     {% endfor %}
 </div>
 

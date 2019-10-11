@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello AdminSerieController!{% endblock %}
+
+{% block body %}
+<div class="text-center">
+    <h1>Gérer les Series</h1>
+    <br/><br/>
+    <hr/>
+    {% for laSerie in lesSeries %}
+        <h5>{{ laSerie.titre }}</h5>
+        <a href="{{ path('edit_serie', {'id': laSerie.id}) }}">Edit</a>
+        <br/><br/>
+        <hr/>
+    {% endfor %}
+</div>
+{% endblock %}

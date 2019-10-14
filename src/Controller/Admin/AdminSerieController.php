@@ -37,4 +37,36 @@ class AdminSerieController extends AbstractController
         }
         return $this->render('admin/admin_serie/edit.html.twig', ['laSerie'=>$serie, 'form'=>$form->createView()]);
     }
+
+    /**
+     * @Route("/delete/{id}", name="delete_serie")
+     */
+    public function delete_serie($id)
+    {
+        $repository = $this->getDoctrine()->getRepository(Serie::class);
+        $serie = $repository->find($id);
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->remove($serie);
+        $entityManager->flush();
+
+        return $this->redirectToRoute("admin_serie");
+    }
+
+    /**
+     * @Route("/add", name="add_serie")
+     */
+    public function add_serie(Request $request)
+    {
+        $serie = new Serie();
+        $form=$this->createForm(SerieType::class, $serie);
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()){
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($serie);
+            $entityManager->flush();
+
+            return $this->redirectToRoute("admin_serie");
+        }
+        return $this->render('admin/admin_serie/add.html.twig', ['laSerie'=>$serie, 'form'=>$form->createView()]);
+    }
 }

@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Genre;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\ORM\EntityRepository;
 
 /**
  * @method Genre|null find($id, $lockMode = null, $lockVersion = null)

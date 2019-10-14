@@ -4,9 +4,11 @@ namespace App\Form;
 
 use App\Entity\Serie;
 use App\Entity\Genre;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Doctrine\ORM\EntityRepository;
 
 class SerieType extends AbstractType
 {
@@ -19,7 +21,10 @@ class SerieType extends AbstractType
             ->add('premiereDiffusion')
             ->add('image')
             //->add('lesGenres')
-            //->add('lesGenres', SerieType::class, array('class'=>Genre::class, 'choice_label'=>'libelle', 'multiple'=>true,))
+            ->add('lesGenres', EntityType::class, array('class'=>Genre::class, 'choice_label'=>'libelle', 'multiple'=>true, 'expanded'=>true, 'query_builder' => function (EntityRepository $er) {
+                return $er->createQueryBuilder('genre')
+                    ->orderBy('genre.libelle', 'ASC');
+            }))
             ;
     }
 

@@ -33,7 +33,7 @@ class AdminSerieController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->flush();
 
-            $this->redirectToRoute('admin_serie');
+            return $this->redirectToRoute("admin_serie");
         }
         return $this->render('admin/admin_serie/edit.html.twig', ['laSerie'=>$serie, 'form'=>$form->createView()]);
     }

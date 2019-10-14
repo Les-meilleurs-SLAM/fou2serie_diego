@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello AdminSerieController!{% endblock %}
+
+{% block body %}
+<div class="text-center">
+    <h1>Voulez-vous supprimer la série: {{laSerie.titre}}</h1>
+    <br/><br/>
+    <hr/>
+    <a href="{{ path('deleteYes_serie', {'id': laSerie.id}) }}"> Oui </a>
+    <a href="{{path('admin_serie')}}"> Non </a>
+</div>
+{% endblock %}

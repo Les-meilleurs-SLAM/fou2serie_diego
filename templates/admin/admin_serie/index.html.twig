@@ -13,6 +13,7 @@
     {% for laSerie in lesSeries %}
         <h5>{{ laSerie.titre }}</h5>
         <a href="{{ path('edit_serie', {'id': laSerie.id}) }}">Edit</a>
+         - 
         <a href="{{ path('delete_serie', {'id': laSerie.id}) }}">Delete</a>
         <br/><br/>
         <hr/>

@@ -45,6 +45,16 @@ class AdminSerieController extends AbstractController
     {
         $repository = $this->getDoctrine()->getRepository(Serie::class);
         $serie = $repository->find($id);
+        return $this->render('admin/admin_serie/delete.html.twig', ['laSerie'=>$serie]);
+    }
+
+    /**
+     * @Route("/deleteYes/{id}", name="deleteYes_serie")
+     */
+    public function deleteYes_serie($id)
+    {
+        $repository = $this->getDoctrine()->getRepository(Serie::class);
+        $serie = $repository->find($id);
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->remove($serie);
         $entityManager->flush();

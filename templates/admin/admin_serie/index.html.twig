@@ -7,14 +7,17 @@
     <h1>Gérer les Series</h1>
     <br/><br/>
     <hr/>
-    <a href="{{ path('add_serie') }}">Ajouter une Série</a>
+    <a href="{{ path('add_serie') }}" class="btn btn-primary" role="button" >Ajouter une Série  <i class="fas fa-plus-circle"></i></a>
     <br/>
     <hr/>
     {% for laSerie in lesSeries %}
         <h5>{{ laSerie.titre }}</h5>
-        <a href="{{ path('edit_serie', {'id': laSerie.id}) }}">Edit</a>
-         - 
-        <a href="{{ path('delete_serie', {'id': laSerie.id}) }}">Delete</a>
+        <a href="{{ path('edit', {id : laSerie.id})}}" role="button" class="btn btn-warning"><i class="fas fa-edit"></i></a>
+        <form action="{{ path('admin', {id : laSerie.id})}}" method="post" onSubmit="return confirm('messageDeConfirmation')" >
+            <input type="hidden" name="_method" value="DELETE"></input>
+            <input type="hidden" name="_token" value="{{csrf_token('delete'~ laSerie.id)}}"></input>
+            <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i></button>
+        </form>
         <br/><br/>
         <hr/>
     {% endfor %}

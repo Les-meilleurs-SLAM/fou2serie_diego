@@ -9,8 +9,7 @@
     <br/><br/>
     <hr/>
     {% for unGenre in lesGenres %}
-        <h4><a href="{{ path('infoGenre', {'id': unGenre.id}) }}" > {{ unGenre.libelle }}</a></h4>
-        <br/>
+        <h4><a href="{{ path('infoGenre', {'id': unGenre.id}) }}" role="button" class="btn btn-primary"> {{ unGenre.libelle }}</a></h4>
         <hr/>
     {% endfor %}
 </div>

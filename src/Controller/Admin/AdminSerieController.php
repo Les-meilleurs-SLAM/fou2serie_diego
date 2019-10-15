@@ -21,7 +21,7 @@ class AdminSerieController extends AbstractController
     }
 
     /**
-     * @Route("/admin/{id}", name="edit_serie")
+     * @Route("/admin/{id}", name="edit", methods="GET|POST")
      */
     public function edit_serie($id, Request $request)
     {
@@ -39,27 +39,20 @@ class AdminSerieController extends AbstractController
     }
 
     /**
-     * @Route("/delete/{id}", name="delete_serie")
+     * @Route("/admin/{id}", name="admin", methods="DELETE")
      */
-    public function delete_serie($id)
+    public function delete_serie($id, Request $request)
     {
-        $repository = $this->getDoctrine()->getRepository(Serie::class);
-        $serie = $repository->find($id);
-        return $this->render('admin/admin_serie/delete.html.twig', ['laSerie'=>$serie]);
-    }
+        if($this->isCsrfTokenValid('delete'.$id, $request->request->get('_token')))
+        {
+            $repository = $this->getDoctrine()->getRepository(Serie::class);
+            $serie = $repository->find($id);
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->remove($serie);
+            $entityManager->flush();
 
-    /**
-     * @Route("/deleteYes/{id}", name="deleteYes_serie")
-     */
-    public function deleteYes_serie($id)
-    {
-        $repository = $this->getDoctrine()->getRepository(Serie::class);
-        $serie = $repository->find($id);
-        $entityManager = $this->getDoctrine()->getManager();
-        $entityManager->remove($serie);
-        $entityManager->flush();
-
-        return $this->redirectToRoute("admin_serie");
+            return $this->redirectToRoute("admin_serie");
+        }
     }
 
     /**

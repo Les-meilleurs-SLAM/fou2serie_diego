@@ -30,10 +30,14 @@ class AdminSerieController extends AbstractController
         $form=$this->createForm(SerieType::class,$serie);
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()){
+            $this->addFlash('succesMessage','Série modifiée avec succès');
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->flush();
 
             return $this->redirectToRoute("admin_serie");
+        }
+        else{
+            $this->addFlash('errorMessage','Une erreur s\'est produite lors de la modification');
         }
         return $this->render('admin/admin_serie/edit.html.twig', ['laSerie'=>$serie, 'form'=>$form->createView()]);
     }
@@ -45,6 +49,7 @@ class AdminSerieController extends AbstractController
     {
         if($this->isCsrfTokenValid('delete'.$id, $request->request->get('_token')))
         {
+            $this->addFlash('succesMessage','Félicitation, Vous avez détruit une série, en espérant que personne était en train de la regarder');
             $repository = $this->getDoctrine()->getRepository(Serie::class);
             $serie = $repository->find($id);
             $entityManager = $this->getDoctrine()->getManager();
@@ -52,6 +57,9 @@ class AdminSerieController extends AbstractController
             $entityManager->flush();
 
             return $this->redirectToRoute("admin_serie");
+        }
+        else{
+            $this->addFlash('errorMessage','Une erreur s\'est produite lors de la suppression');
         }
     }
 
@@ -64,11 +72,15 @@ class AdminSerieController extends AbstractController
         $form=$this->createForm(SerieType::class, $serie);
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()){
+            $this->addFlash('succesMessage','Félicitation, L\'ajout est un succès');
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($serie);
             $entityManager->flush();
 
             return $this->redirectToRoute("admin_serie");
+        }
+        else{
+            $this->addFlash('errorMessage','Une erreur s\'est produite lors de la suppression');
         }
         return $this->render('admin/admin_serie/add.html.twig', ['laSerie'=>$serie, 'form'=>$form->createView()]);
     }

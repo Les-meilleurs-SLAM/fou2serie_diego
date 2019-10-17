@@ -9,6 +9,12 @@
     <hr/>
     <a href="{{ path('add_serie') }}" class="btn btn-primary" role="button" >Ajouter une Série  <i class="fas fa-plus-circle"></i></a>
     <br/>
+    {% for message in app.flashes('succesMessage') %}
+        {{ message }}
+    {% endfor %}
+    {% for message in app.flashes('errorMessage') %}
+        {{ message }}
+    {% endfor %}
     <hr/>
     {% for laSerie in lesSeries %}
         <h5>{{ laSerie.titre }}</h5>

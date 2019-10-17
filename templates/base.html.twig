@@ -86,6 +86,34 @@
                 -webkit-animation: rotate-center 0.6s ease-in-out both;
                 animation: rotate-center 0.6s ease-in-out both;
             }
+            html{
+                height:100%;
+            }   
+            body {
+                height: 100%;
+                margin:0;
+                padding:0;
+            }
+            .global{
+                min-height: 100%;
+                position: relative;
+            }
+            header{
+                background: #998B7D;
+                height: 50px;
+            }         
+            footer{
+                background: #998B7D;
+                position: absolute;
+                bottom: 0;
+                width: 100%;
+                height: 50px;
+                margin-top: 50px;
+            }
+            
+            .content{
+            padding-bottom: 50px;
+            }
             @-webkit-keyframes rotate-center {
                 0% {
                     -webkit-transform: rotate(0);
@@ -141,7 +169,7 @@
         </nav>
         <br/><br />
     </header>
-    <body>
+    <body style="background-attachment:fixed;">
         {% block body %}{% endblock %}
         <button type="button" style="float: right" class="btn btn-primary px-3" onclick="topFunction()" id="toTop" title="Haut de page">
             <i class="fas fa-angle-double-up"></i>

@@ -7,12 +7,11 @@
     <h1>Gérer les Series</h1>
     <br/><br/>
     <hr/>
+    <a href="{{path('admin_genre')}}" class="btn btn-primary" role="button" >Editer les genres  <i class="fas fa-mouse-pointer"></i></a>
+    <hr/>
     <a href="{{ path('add_serie') }}" class="btn btn-primary" role="button" >Ajouter une Série  <i class="fas fa-plus-circle"></i></a>
     <br/>
     {% for message in app.flashes('succesMessage') %}
-        {{ message }}
-    {% endfor %}
-    {% for message in app.flashes('errorMessage') %}
         {{ message }}
     {% endfor %}
     <hr/>

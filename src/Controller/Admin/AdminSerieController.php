@@ -36,9 +36,6 @@ class AdminSerieController extends AbstractController
 
             return $this->redirectToRoute("admin_serie");
         }
-        else{
-            $this->addFlash('errorMessage','Une erreur s\'est produite lors de la modification');
-        }
         return $this->render('admin/admin_serie/edit.html.twig', ['laSerie'=>$serie, 'form'=>$form->createView()]);
     }
 
@@ -58,9 +55,6 @@ class AdminSerieController extends AbstractController
 
             return $this->redirectToRoute("admin_serie");
         }
-        else{
-            $this->addFlash('errorMessage','Une erreur s\'est produite lors de la suppression');
-        }
     }
 
     /**
@@ -78,9 +72,6 @@ class AdminSerieController extends AbstractController
             $entityManager->flush();
 
             return $this->redirectToRoute("admin_serie");
-        }
-        else{
-            $this->addFlash('errorMessage','Une erreur s\'est produite lors de la suppression');
         }
         return $this->render('admin/admin_serie/add.html.twig', ['laSerie'=>$serie, 'form'=>$form->createView()]);
     }
